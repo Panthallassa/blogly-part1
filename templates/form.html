@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}Add User{%
+endblock %} {% block content %}
+<h1>Create a user</h1>
+<form
+	action="{{ url_for('add_new_user') }}"
+	class="user-form"
+	method="post"
+>
+	<div class="mb-3">
+		<label for="first" class="form-label">First Name</label>
+		<input
+			type="text"
+			id="first"
+			name="first_name"
+			class="form-control"
+			placeholder="Enter a first name"
+			required
+		/>
+	</div>
+	<div class="mb-3">
+		<label for="last" class="form-label">Last Name</label>
+		<input
+			type="text"
+			id="last"
+			name="last_name"
+			class="form-control"
+			placeholder="Enter a last name"
+			required
+		/>
+	</div>
+	<div class="mb-3">
+		<label for="image" class="form-label">Image URL</label>
+		<input
+			type="text"
+			id="image"
+			name="image_url"
+			class="form-control"
+			placeholder="Provide an image of this user"
+		/>
+	</div>
+	<button type="submit" class="btn btn-primary">Add</button>
+</form>
+{% endblock %}
