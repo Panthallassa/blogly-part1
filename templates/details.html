@@ -30,7 +30,31 @@ endblock %} {% block content %}
 					>
 				</div>
 			</div>
+			<div class="card-header">
+				<h2 class="display-4 mt-5 text-center">Posts</h2>
+			</div>
+			{% if user.posts %}
+			<ul class="list-group mt-3">
+				{% for post in user.posts %}
+				<li class="list-group-item">
+					<h3>
+						<a
+							href="{{ url_for('show_post', post_id=post.id) }}"
+							>{{ post.title }}</a
+						>
+					</h3>
+				</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<p>No posts</p>
+			{% endif %}
 		</div>
+		<a
+			href="{{ url_for('new_post', user_id=user.id) }}"
+			class="btn btn-success mt-3"
+			>Add Post</a
+		>
 	</div>
 </div>
 
