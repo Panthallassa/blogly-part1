@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %} New Post{%
+{% extends "base.html" %} {% block title %} {{post.title}}{%
 endblock %} {% block content %}
 
 <div class="container mt-5">
@@ -28,6 +28,14 @@ endblock %} {% block content %}
 				Delete
 			</button>
 		</form>
+	</div>
+	<div class="mt-4">
+		<h5>Tags:</h5>
+		<div>
+			{% for tag in post.tags %}
+			<span class="badge">{{ tag.name }}</span>
+			{% endfor %}
+		</div>
 	</div>
 </div>
 

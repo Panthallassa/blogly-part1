@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %} Create a Tag{%
+endblock %} {% block content %}
+
+<h1 class="display-4 mb-4">Create a Tag</h1>
+
+<form action="{{ url_for('commit_tag') }}" method="post">
+	<label for="add-tag">Name</label>
+	<input
+		type="text"
+		id="add-tag"
+		name="add-tag"
+		placeholder="Enter a name for the tag"
+	/>
+
+	<a
+		href="{{ url_for('show_tags') }}"
+		class="btn btn-primary"
+		>Cancel</a
+	>
+
+	<button type="submit" class="btn btn-success">Add</button>
+</form>
+
+{% endblock %}
