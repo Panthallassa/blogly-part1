@@ -86,7 +86,9 @@ def delete_user(user_id):
 def new_post(user_id):
     """Adds a new post"""
     user = User.query.get_or_404(user_id)
-    return render_template('post.html', user=user)
+    tags = Tag.query.all()
+    
+    return render_template('post.html', user=user, tags=tags)
 
 
 @app.route('/users/<int:user_id>/posts/new', methods=["POST"])
@@ -94,6 +96,7 @@ def submit_post(user_id):
     """Handles the submission of a post"""
     title = request.form['title']
     content = request.form['content']
+    tag_ids = request.form.getlist('tags')
 
     if not title or not content:
         flash('Title and content required.', 'error')
@@ -103,6 +106,11 @@ def submit_post(user_id):
     db.session.add(new_post)
     db.session.commit()
 
+    if tag_ids:
+        tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+        new_post.tags = tags
+        db.session.commit()
+
     return redirect(url_for('show_user_page', user_id=user_id))
 
 
@@ -110,8 +118,7 @@ def submit_post(user_id):
 def show_post(post_id):
     """Shows the post of given id"""
     post = Post.query.get_or_404(post_id)
-    for tag in post.tags:
-        print(f"<<<<<<Tag: {tag.name}>>>>>>>")
+    tags = post.tags
 
     return render_template('post_details.html', post=post, tags=post.tags)
 
